@@ -27,17 +27,19 @@ app.service('teamService', function($http, $q){
             var losses = 0;
 
             for(var i = 0; i < results.length; i++) {
-                if (results.won[i] === true) {
+                if (results[i].won === true) {
                     wins = wins + 1;
                 }
                 else {
                     losses = losses + 1;
                 }
 
-                results.push(wins, losses);
-
-                deferred.resolve(results);  
             }
+
+            results.wins = wins;
+            results.losses = losses
+
+            deferred.resolve(results);
         });
 
         return deferred.promise;
