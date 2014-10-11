@@ -2,7 +2,7 @@ var app = angular.module('nbaRoutes');
 
 app.service('teamService', function($http, $q){
 
-    var addNewGame = function(gameObj){
+    this.addNewGame = function(gameObj){
         var url = "http://api.parse.com/1/classes/" + gameObj.homeTeam;
 
         if(parseInt(gameObj.homeTeamScore) > parseInt(gameObj.opponentScore)) {
@@ -15,7 +15,7 @@ app.service('teamService', function($http, $q){
         return $http({method: "GET", url: url, data: gameObj});
     };
 
-    var getTeamData = function(team){
+    this.getTeamData = function(team){
 
         var deferred = $q.defer();
 
@@ -33,11 +33,10 @@ app.service('teamService', function($http, $q){
                 else {
                     losses = losses + 1;
                 }
-
             }
 
             results.wins = wins;
-            results.losses = losses
+            results.losses = losses;
 
             deferred.resolve(results);
         });
