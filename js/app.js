@@ -13,9 +13,12 @@ app.config(function($routeProvider, $httpProvider){
         controller: 'teamCtrl',
         resolve: {
             teamData: function($route, teamService){
-            return teamService.getTeamData($route.current.params.team);
+                return teamService.getTeamData($route.current.params.team);
             }
         }
+    })
+    .otherwise({
+        redirectTo: '/'
     })
 
 });
